@@ -289,7 +289,6 @@ download_pkg() {
   if (($?)); then
     echo_colored "Downloading \"${_PKG_NAME}\"\n开始下载 \"${_PKG_NAME}\""
     mkdir -p ${USER_PKG_DIR}/${_PKG_PREFIX}
-    if [[ ${PROXY_MODE} == "true" ]]; then PROXY_COMMAND="proxychains"; else PROXY_COMMAND=""; fi
     ${PROXY_COMMAND} wget ${_PKG_DOWNLOAD_URL} -O ${USER_PKG_DIR}/${_PKG_PREFIX}/${_PKG_FILE}
     if (($?)); then
       echo_colored "Error downloading \"${_PKG_NAME}\"\n下载 \"${_PKG_NAME}\" 时发生错误" -FC red
@@ -357,27 +356,31 @@ else
 fi
 
 # Check proxychains status.
-# 检查 proxychains 代理状态
+# 检查 proxychains4 代理状态
 if [[ ${PROXY_MODE} == "true" ]]; then
   echo
   echo_colored "Proxy mode\n代理模式"
   echo
   echo_colored "Check proxychains status\n检查 proxychains 状态"
   echo
-  if [ -x /usr/bin/proxychains ]; then
-    echo_colored "proxychains has been installed\nproxychains 已经安装" -FC green
+
+  if [[ "${UBUNTU_RELEASE}" == "16.04" ]]; then
+    PROXY_COMMAND="proxychains"
   else
-    echo_colored "proxychains has NOT been installed\nproxychains 未安装" -FC red
+    PROXY_COMMAND="proxychains4"
+  fi
+
+  test -x /usr/bin/$PROXY_COMMAND
+  if [ $? ]; then
+    echo_colored "proxychains has been installed\nproxychains(4) 已经安装" -FC green
+  else
+    echo_colored "proxychains has NOT been installed\nproxychains(4) 未安装" -FC red
     echo_colored "Do you want install now?\n是否现在安装?" -FC yellow
     read -p "[Y/n]" _INPUT
     case ${_INPUT} in
     [yY][eE][sS] | [yY])
       sudo apt update
-      if [[ "${UBUNTU_RELEASE}" == "16.04" ]]; then
-        sudo apt install proxychains -y
-      else
-        sudo apt install proxychains4 -y
-      fi
+      sudo apt install $PROXY_COMMAND -y
       if [[ $? != 0 ]]; then
         echo_colored "Install failed, check internet status and try again\n安装失败，请检查网络状态后重试" -FC red
         exit 1
@@ -393,14 +396,16 @@ if [[ ${PROXY_MODE} == "true" ]]; then
       ;;
     esac
   fi
-  if [[ ${PROXY_MODE} == "true" ]]; then
-    proxychains curl www.baidu.com >/dev/null 2>&1
-    if ((!$?)); then
-      echo_colored "proxychains has been configured correctly\nproxychains 已经正确配置" -FC green
-    else
-      echo_colored "proxychains has NOT been configured correctly, configure it and try again\nproxychains 未正确配置，请配置后重试" -FC red
-      echo_colored "close proxy mode\n关闭代理模式"
-      PROXY_MODE="false"
-    fi
+
+  $PROXY_COMMAND curl www.baidu.com >/dev/null 2>&1
+  if ((!$?)); then
+    echo_colored "proxychains has been configured correctly\nproxychains 已经正确配置" -FC green
+  else
+    echo_colored "proxychains has NOT been configured correctly, configure it and try again\nproxychains 未正确配置，请配置后重试" -FC red
+    echo_colored "close proxy mode\n关闭代理模式"
+    PROXY_MODE="false"
+    PROXY_COMMAND=""
+
   fi
+
 fi

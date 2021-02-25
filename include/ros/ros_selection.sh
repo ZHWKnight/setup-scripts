@@ -41,6 +41,7 @@ elif [[ ${FOUND_ROS1:+"true"} == "true" && ${FOUND_ROS2:+"true"} == "true" ]]; t
   elif [[ ${_ROS_VERSION} == "2" ]]; then
     echo "Select ROS2 ${FOUND_ROS2}"
     source /opt/ros/${FOUND_ROS2}/setup.bash
+    source ${HOME}/Workspaces/ros2_ws/install/setup.bash
   else
     echo "Wrong input."
     exit 1

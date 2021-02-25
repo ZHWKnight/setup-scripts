@@ -33,7 +33,7 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
     gnupg2 \
     lsb-release \
     ;
-  if [[ ${PROXY_MODE} == "true" ]]; then PROXY_COMMAND="proxychains"; else PROXY_COMMAND=""; fi
+
   ${PROXY_COMMAND} curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
   if (($?)); then
     echo_colored "Error occurred, try again\n发生错误，请重试" -FC red
@@ -69,24 +69,6 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
     exit 1
   fi
 
-  # Initialize rosdep
-  # echo
-  # echo_colored "Initialize rosdep\n初始化 rosdep"
-  # echo
-
-  # if [[ -f "/etc/ros/rosdep/sources.list.d/20-default.list" ]]; then
-  #   sudo rm "/etc/ros/rosdep/sources.list.d/20-default.list"
-  # fi
-
-  # if [[ ${PROXY_MODE} == "true" ]]; then PROXY_COMMAND="proxychains"; else PROXY_COMMAND=""; fi
-  # sudo ${PROXY_COMMAND} rosdep init &&
-  #   ${PROXY_COMMAND} rosdep update
-
-  # if (($?)); then
-  #   echo_colored "Error occurred, try again\n发生错误，请重试" -FC red
-  #   exit 1
-  # fi
-
   # Setup environment variables
   echo
   echo_colored "Setup environment variables\n设置环境变量"
@@ -96,7 +78,12 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
   case ${_INPUT} in
   [yY][eE][sS] | [yY])
     cp ros_selection.sh ${HOME}/.ros_selection.sh
-    echo "alias ros=\"source ${HOME}/.ros_selection.sh\"" >>${HOME}/.bashrc
+    rosselect="alias ros=\"source ${HOME}/.ros_selection.sh\""
+    if grep -Fxq "$rosselect" ~/.bashrc; then
+      :
+    else
+      echo "$rosselect" >>~/.bashrc
+    fi
     source ${HOME}/.bashrc
     ros 2
     ;;
@@ -126,18 +113,6 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
   mkdir -p ${USER_ROS2_WORKSPACE}/src
   cd ${USER_ROS2_WORKSPACE}
 
-  # Re-source environment to reflect new packages/build environment
-  # echo
-  # echo_colored "Re-source environment to reflect new packages/build environment\n重溯环境变量以刷新构建的软件包"
-
-  # ros2_ws_source="source ${USER_ROS2_WORKSPACE}/devel/setup.bash"
-  # if grep -Fxq "$ros2_ws_source" ~/.bashrc; then
-  #   :
-  # else
-  #   echo "$ros2_ws_source" >>~/.bashrc
-  # fi
-  # eval $ros2_ws_source
-
 elif [[ ${DEVLOPMENT_MODE} == "true" ]]; then
   echo
   echo_colored "Devlopment mode\n开发模式"
@@ -149,11 +124,11 @@ echo
 echo_colored "===============操作结束===============" -FC light_blue -DE bold
 echo
 
-# ros2 --help >/dev/null 2>&1
-# if (($?)); then
-#   echo_colored "ROS2 has NOT been installed correctly, try again.\nROS2 没有被正确安装，请重试" -FC red
-# else
-#   echo_colored "ROS2 has been installed correctly.\nROS2 已经被正确安装" -FC green
-# fi
+ros2 --help >/dev/null 2>&1
+if (($?)); then
+  echo_colored "ROS2 has NOT been installed correctly, try again.\nROS2 没有被正确安装，请重试" -FC red
+else
+  echo_colored "ROS2 has been installed correctly.\nROS2 已经被正确安装" -FC green
+fi
 
 echo_colored "$LAST_TIPS" -FC yellow

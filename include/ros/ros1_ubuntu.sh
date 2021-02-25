@@ -89,13 +89,12 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
     sudo rm "/etc/ros/rosdep/sources.list.d/20-default.list"
   fi
 
-  if [[ ${PROXY_MODE} == "true" ]]; then PROXY_COMMAND="proxychains"; else PROXY_COMMAND=""; fi
   sudo ${PROXY_COMMAND} rosdep init &&
     ${PROXY_COMMAND} rosdep update
 
   if (($?)); then
-    echo_colored "Error occurred, try again\n发生错误，请重试" -FC red
-    exit 1
+    echo_colored "Error occurred, try again\n发生错误，请稍后重试，这一步通常因为网络问题导致失败！" -FC red
+    # exit 1
   fi
 
   # Setup environment variables
@@ -116,17 +115,20 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
     case ${_INPUT} in
     [yY][eE][sS] | [yY])
       cp ros_selection.sh ${HOME}/.ros_selection.sh
-      echo "alias ros=\"source ${HOME}/.ros_selection.sh\"" >>${HOME}/.bashrc
+      rosselect="alias ros=\"source ${HOME}/.ros_selection.sh\""
+      if grep -Fxq "$rosselect" ~/.bashrc; then
+        :
+      else
+        echo "$rosselect" >>~/.bashrc
+      fi
       source ${HOME}/.bashrc
       ros 1
       ;;
     [nN][oO] | [nN])
       if [[ "${UBUNTU_RELEASE}" == "18.04" ]]; then
         rossource="source /opt/ros/melodic/setup.bash"
-        source /opt/ros/melodic/setup.bash
       elif [[ "${UBUNTU_RELEASE}" == "20.04" ]]; then
         rossource="source /opt/ros/noetic/setup.bash"
-        source /opt/ros/noetic/setup.bash
       fi
       if grep -Fxq "$rossource" ~/.bashrc; then
         :
@@ -168,25 +170,10 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
   fi
   eval $catkin_ws_source
 
-  # Detect if in vmware
-  echo
-  echo_colored "Fix VMWare 3D graphics acceleration\n修复 VMWare 3D 显卡加速" -FC blue
-
-  vmware_graphics_acceleration_export="export SVGA_VGPU10=0"
-  if (($(sudo dmidecode -s system-manufacturer | grep -ic VMware))); then
-    if grep -Fxq "$vmware_graphics_acceleration_export" ~/.profile; then
-      :
-    else
-      echo "$vmware_graphics_acceleration_export" >>~/.profile
-    fi
-    eval $vmware_graphics_acceleration_export
-  fi
-
 elif [[ ${DEVLOPMENT_MODE} == "true" ]]; then
   echo
   echo_colored "Devlopment mode\n开发模式"
 fi
-
 
 echo
 echo_colored "===============操作结束===============" -FC light_blue -DE bold
