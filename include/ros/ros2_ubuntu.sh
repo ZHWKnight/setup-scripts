@@ -15,6 +15,15 @@ source $(dirname $cur_dir)/Public/general.sh
 # ROS2 Documentation
 # https://index.ros.org/doc/ros2/
 
+if [[ "${UBUNTU_RELEASE}" == "18.04" ]]; then
+  SH_ROS_DISTRO="dashing"
+elif [[ "${UBUNTU_RELEASE}" == "20.04" ]]; then
+  SH_ROS_DISTRO="foxy"
+else
+  echo_colored "ROS2 unsupport this OS, try again\nROS1 不支持此系统" -FC red
+  exit 1
+fi
+
 if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
   echo
   echo_colored "Deployment mode\n部署模式"
@@ -46,24 +55,14 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
   echo
   echo_colored "Install ROS2, build tools\n安装 ROS2 和构建工具"
   echo
-  if [[ "${UBUNTU_RELEASE}" == "18.04" ]]; then
-    sudo apt install -y \
-      ros-dashing-desktop \
-      ros-dashing-ros1-bridge \
-      python3-colcon-common-extensions \
-      python3-argcomplete \
-      ;
-  elif [[ "${UBUNTU_RELEASE}" == "20.04" ]]; then
-    sudo apt install -y \
-      ros-foxy-desktop \
-      ros-foxy-ros1-bridge \
-      python3-colcon-common-extensions \
-      python3-argcomplete \
-      ;
-  else
-    echo_colored "ROS2 unsupport this OS, try again\nROS2 不支持此系统" -FC red
-    exit 1
-  fi
+
+  sudo apt install -y \
+    ros-${SH_ROS_DISTRO}-desktop \
+    ros-${SH_ROS_DISTRO}-ros1-bridge \
+    python3-colcon-common-extensions \
+    python3-argcomplete \
+    ;
+
   if (($?)); then
     echo_colored "Error occurred, try again\n发生错误，请重试" -FC red
     exit 1
@@ -78,21 +77,16 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
   case ${_INPUT} in
   [yY][eE][sS] | [yY])
     cp ros_selection.sh ${HOME}/.ros_selection.sh
-    rosselect="alias ros=\"source ${HOME}/.ros_selection.sh\""
+    rosselect="alias ros=\". ${HOME}/.ros_selection.sh\""
     if grep -Fxq "$rosselect" ~/.bashrc; then
       :
     else
       echo "$rosselect" >>~/.bashrc
     fi
-    source ${HOME}/.bashrc
-    ros 2
+    source /opt/ros/${SH_ROS_DISTRO}/setup.bash
     ;;
   [nN][oO] | [nN])
-    if [[ "${UBUNTU_RELEASE}" == "18.04" ]]; then
-      rossource="source /opt/ros/dashing/setup.bash"
-    elif [[ "${UBUNTU_RELEASE}" == "20.04" ]]; then
-      rossource="source /opt/ros/foxy/setup.bash"
-    fi
+    rossource="source /opt/ros/${SH_ROS_DISTRO}/setup.bash"
     if grep -Fxq "$rossource" ~/.bashrc; then
       :
     else
@@ -112,6 +106,28 @@ if [[ ${DEVLOPMENT_MODE} == "false" ]]; then
   echo
   mkdir -p ${USER_ROS2_WORKSPACE}/src
   cd ${USER_ROS2_WORKSPACE}
+  colcon build
+  if (($?)); then
+    echo_colored "Error occurred, try again\n发生错误，请重试" -FC red
+    exit 1
+  fi
+
+  # Initialize rosdep
+  echo
+  echo_colored "Initialize rosdep\n初始化 rosdep" -FC blue
+  echo
+
+  if [[ -f "/etc/ros/rosdep/sources.list.d/20-default.list" ]]; then
+    sudo rm "/etc/ros/rosdep/sources.list.d/20-default.list"
+  fi
+
+  sudo ${PROXY_COMMAND} rosdep init &&
+    ${PROXY_COMMAND} rosdep update
+
+  if (($?)); then
+    echo_colored "Error occurred, try again\n发生错误，请稍后重试，这一步通常因为网络问题导致失败！" -FC red
+    # exit 1
+  fi
 
 elif [[ ${DEVLOPMENT_MODE} == "true" ]]; then
   echo

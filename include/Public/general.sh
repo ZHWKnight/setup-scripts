@@ -16,8 +16,8 @@ SCRIPT_DIR=${TEMPLET_DIR%/*}
 USER_APP_DIR=${HOME}/App
 USER_ENV_DIR=${HOME}/Env
 USER_PKG_DIR=${HOME}/Downloads/Pkg
-USER_ROS1_WORKSPACE=${HOME}/Workspaces/ros1_ws
-USER_ROS2_WORKSPACE=${HOME}/Workspaces/ros2_ws
+USER_ROS1_WORKSPACE=${HOME}/Works/ros1_ws
+USER_ROS2_WORKSPACE=${HOME}/Works/ros2_ws
 
 UBUNTU_RELEASE=$(lsb_release -rs)
 LAST_TIPS=""
@@ -39,7 +39,7 @@ echo_colored() {
     let arg_index+=1
   done
 
-  case $foreground_color_index in
+  case ${foreground_color_index} in
   "default")
     foreground_color_param="39"
     ;;
@@ -96,7 +96,7 @@ echo_colored() {
     ;;
   esac
 
-  case $background_color_index in
+  case ${background_color_index} in
   "default")
     background_color_param="49"
     ;;
@@ -153,7 +153,7 @@ echo_colored() {
     ;;
   esac
 
-  case $decoration_index in
+  case ${decoration_index} in
   "reset_all")
     decoration_param="0"
     ;;
@@ -213,13 +213,13 @@ echo_colored() {
   local reset_param
   local newline_param
 
-  if [[ $no_newline_flag == "true" ]]; then
+  if [[ ${no_newline_flag} == "true" ]]; then
     newline_param="n"
   else
     newline_param=""
   fi
 
-  if [[ $no_reset_flag == "true" ]]; then
+  if [[ ${no_reset_flag} == "true" ]]; then
     reset_param=""
   else
     reset_param="\e[0m"
@@ -340,10 +340,7 @@ echo
 echo_colored "Check Ubuntu version\n检查 Ubuntu 系统版本"
 echo
 
-if [[ "${UBUNTU_RELEASE}" == "16.04" ]]; then
-  echo "OS version detected as $(lsb_release -sc) $(lsb_release -rs)"
-  echo_colored "OS version was supported\n支持的系统版本" -FC green
-elif [[ "${UBUNTU_RELEASE}" == "18.04" ]]; then
+if [[ "${UBUNTU_RELEASE}" == "18.04" ]]; then
   echo "OS version detected as $(lsb_release -sc) $(lsb_release -rs)"
   echo_colored "OS version was supported\n支持的系统版本" -FC green
 elif [[ "${UBUNTU_RELEASE}" == "20.04" ]]; then
@@ -355,32 +352,28 @@ else
   exit 1
 fi
 
-# Check proxychains status.
+# Check proxychains4 status.
 # 检查 proxychains4 代理状态
 if [[ ${PROXY_MODE} == "true" ]]; then
   echo
   echo_colored "Proxy mode\n代理模式"
   echo
-  echo_colored "Check proxychains status\n检查 proxychains 状态"
+  echo_colored "Check proxychains4 status\n检查 proxychain4 状态"
   echo
 
-  if [[ "${UBUNTU_RELEASE}" == "16.04" ]]; then
-    PROXY_COMMAND="proxychains"
-  else
-    PROXY_COMMAND="proxychains4"
-  fi
+  PROXY_COMMAND="proxychains4"
 
-  test -x /usr/bin/$PROXY_COMMAND
+  test -x /usr/bin/${PROXY_COMMAND}
   if [ $? ]; then
-    echo_colored "proxychains has been installed\nproxychains(4) 已经安装" -FC green
+    echo_colored "proxychains4 has been installed\nproxychains4 已经安装" -FC green
   else
-    echo_colored "proxychains has NOT been installed\nproxychains(4) 未安装" -FC red
+    echo_colored "proxychains4 has NOT been installed\nproxychains4 未安装" -FC red
     echo_colored "Do you want install now?\n是否现在安装?" -FC yellow
     read -p "[Y/n]" _INPUT
     case ${_INPUT} in
     [yY][eE][sS] | [yY])
       sudo apt update
-      sudo apt install $PROXY_COMMAND -y
+      sudo apt install ${PROXY_COMMAND} -y
       if [[ $? != 0 ]]; then
         echo_colored "Install failed, check internet status and try again\n安装失败，请检查网络状态后重试" -FC red
         exit 1
@@ -397,11 +390,11 @@ if [[ ${PROXY_MODE} == "true" ]]; then
     esac
   fi
 
-  $PROXY_COMMAND curl www.baidu.com >/dev/null 2>&1
+  ${PROXY_COMMAND} curl www.baidu.com >/dev/null 2>&1
   if ((!$?)); then
-    echo_colored "proxychains has been configured correctly\nproxychains 已经正确配置" -FC green
+    echo_colored "proxychains4 has been configured correctly\nproxychains4 已经正确配置" -FC green
   else
-    echo_colored "proxychains has NOT been configured correctly, configure it and try again\nproxychains 未正确配置，请配置后重试" -FC red
+    echo_colored "proxychains4 has NOT been configured correctly, configure it and try again\nproxychains4 未正确配置，请配置后重试" -FC red
     echo_colored "close proxy mode\n关闭代理模式"
     PROXY_MODE="false"
     PROXY_COMMAND=""

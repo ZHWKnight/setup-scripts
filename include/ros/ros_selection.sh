@@ -41,7 +41,7 @@ elif [[ ${FOUND_ROS1:+"true"} == "true" && ${FOUND_ROS2:+"true"} == "true" ]]; t
   elif [[ ${_ROS_VERSION} == "2" ]]; then
     echo "Select ROS2 ${FOUND_ROS2}"
     source /opt/ros/${FOUND_ROS2}/setup.bash
-    source ${HOME}/Workspaces/ros2_ws/install/setup.bash
+    source ${HOME}/Workspaces/ros2_ws/install/local_setup.bash
   else
     echo "Wrong input."
     exit 1
@@ -50,6 +50,6 @@ else
   echo "No ROS be found"
 fi
 
-# #source /home/ros/RobTool/ROS1/Wiki/devel/setup.bash
-# #export ROS_MASTER_URI=http://192.168.1.100:11311
-# #export ROS_IP=192.168.1.100
+#source /home/ros/RobTool/ROS1/Wiki/devel/setup.bash
+#export ROS_MASTER_URI=http://192.168.1.100:11311
+#export ROS_IP=192.168.1.100
