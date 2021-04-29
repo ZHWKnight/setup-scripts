@@ -23,10 +23,10 @@ fi
 
 if [[ ${FOUND_ROS1:+"true"} == "true" && ${FOUND_ROS2:+"true"} != "true" ]]; then
   source /opt/ros/${FOUND_ROS1}/setup.bash
-  source ${HOME}/Workspaces/ros1_ws/devel/setup.bash
+  source ${HOME}/Works/ros1_ws/devel/setup.bash
 elif [[ ${FOUND_ROS1:+"true"} != "true" && ${FOUND_ROS2:+"true"} == "true" ]]; then
   source /opt/ros/${FOUND_ROS2}/setup.bash
-
+  source ${HOME}/Works/ros2_ws/install/local_setup.bash
 elif [[ ${FOUND_ROS1:+"true"} == "true" && ${FOUND_ROS2:+"true"} == "true" ]]; then
 
   if [[ $1 ]]; then
@@ -37,11 +37,11 @@ elif [[ ${FOUND_ROS1:+"true"} == "true" && ${FOUND_ROS2:+"true"} == "true" ]]; t
   if [[ ${_ROS_VERSION} == "1" ]]; then
     echo "Select ROS1 ${FOUND_ROS1}"
     source /opt/ros/${FOUND_ROS1}/setup.bash
-    source ${HOME}/Workspaces/ros1_ws/devel/setup.bash
+    source ${HOME}/Works/ros1_ws/devel/setup.bash
   elif [[ ${_ROS_VERSION} == "2" ]]; then
     echo "Select ROS2 ${FOUND_ROS2}"
     source /opt/ros/${FOUND_ROS2}/setup.bash
-    source ${HOME}/Workspaces/ros2_ws/install/local_setup.bash
+    source ${HOME}/Works/ros2_ws/install/local_setup.bash
   else
     echo "Wrong input."
     exit 1
