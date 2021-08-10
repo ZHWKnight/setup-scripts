@@ -1,0 +1,2 @@
+deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main
+# deb-src https://dl.winehq.org/wine-builds/ubuntu/ bionic main

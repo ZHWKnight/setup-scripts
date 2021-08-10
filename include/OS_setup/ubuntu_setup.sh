@@ -6,7 +6,7 @@
 
 # Set apt source to aliyun
 sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
-sudo cp ../../etc/apt/mirrors_lists/$(lsb_release -is)_$(lsb_release -cs).list /etc/apt/sources.list
+sudo cp ../../etc/apt/sources_lists/$(lsb_release -is)_$(lsb_release -cs).list /etc/apt/sources.list
 
 sudo apt update
 
