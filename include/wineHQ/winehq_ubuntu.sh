@@ -10,9 +10,9 @@ sudo apt-add-repository "deb https://dl.winehq.org/wine-builds/ubuntu/ $(lsb_rel
 sudo cp ../../etc/apt/sources_lists/wineHQ_$(lsb_release -cs).list /etc/apt/sources.list.d/winehq.list
 wget -P /tmp https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/i386/libfaudio0_19.07-0~bionic_i386.deb
 wget -P /tmp https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/amd64/libfaudio0_19.07-0~bionic_amd64.deb
-sudo apt install /tmp/libfaudio0_19.07-0~bionic_i386.deb /tmp/libfaudio0_19.07-0~bionic_amd64.deb
+sudo apt install -y /tmp/libfaudio0_19.07-0~bionic_i386.deb /tmp/libfaudio0_19.07-0~bionic_amd64.deb
 sudo apt update
-sudo apt install --install-recommends winehq-stable -y
+sudo apt install -y --install-recommends winehq-stable
 
 # https://wiki.winehq.org/Mono
 # https://wiki.winehq.org/Gecko
@@ -21,7 +21,7 @@ wget -P ~/.cache/wine https://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.
 wget -P ~/.cache/wine https://dl.winehq.org/wine/wine-gecko/2.47.2/wine-gecko-2.47.2-x86.msi
 wget -P ~/.cache/wine https://dl.winehq.org/wine/wine-mono/5.1.1/wine-mono-5.1.1-x86.msi
 
-sudo apt install winetricks
+sudo apt install -y winetricks
 pushd /tmp
 git clone https://gitee.com/ZHWKnight/gitstore_wine_winetricks.git
 # tar -czvf - wine winetricks |split -b 95m - wine_winetricks.tar.gz

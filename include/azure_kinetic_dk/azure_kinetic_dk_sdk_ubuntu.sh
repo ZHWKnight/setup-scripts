@@ -8,7 +8,7 @@ curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 sudo apt-add-repository https://packages.microsoft.com/ubuntu/$(lsb_release -rs)/prod
 sudo apt-get update
 
-sudo apt install k4a-tools libk4a1.4-dev libk4abt1.1-dev
+sudo apt install -y k4a-tools libk4a1.4-dev libk4abt1.1-dev
 
 sudo tee /etc/udev/rules.d/99-k4a.rules <<-'EOF'
 # Bus 002 Device 116: ID 045e:097a Microsoft Corp.  - Generic Superspeed USB Hub

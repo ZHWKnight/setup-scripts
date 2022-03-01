@@ -6,4 +6,4 @@
 
 sudo add-apt-repository ppa:alex-p/aegisub
 sudo apt-get update
-sudo apt aegisub
+sudo apt -y aegisub
