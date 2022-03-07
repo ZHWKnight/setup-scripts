@@ -6,10 +6,10 @@
 
 # Set pip source to aliyun
 mkdir ~/.pip
-tee ~/.pip/pip.conf <<-'EOF'
-	[global]
-	index-url = https://mirrors.aliyun.com/pypi/simple/
-	[install]
-	trusted-host = mirrors.aliyun.com
+tee ~/.pip/pip.conf <<EOF >>/dev/null
+[global]
+index-url = https://mirrors.aliyun.com/pypi/simple/
+[install]
+trusted-host = mirrors.aliyun.com
 EOF
 sudo cp -r ~/.pip /root/

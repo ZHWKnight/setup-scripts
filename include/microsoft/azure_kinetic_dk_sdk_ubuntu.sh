@@ -10,7 +10,7 @@ sudo apt-get update
 
 sudo apt install -y k4a-tools libk4a1.4-dev libk4abt1.1-dev
 
-sudo tee /etc/udev/rules.d/99-k4a.rules <<-'EOF'
+sudo tee /etc/udev/rules.d/99-k4a.rules <<EOF >>/dev/null
 # Bus 002 Device 116: ID 045e:097a Microsoft Corp.  - Generic Superspeed USB Hub
 # Bus 001 Device 015: ID 045e:097b Microsoft Corp.  - Generic USB Hub
 # Bus 002 Device 118: ID 045e:097c Microsoft Corp.  - Azure Kinect Depth Camera

@@ -1,5 +1,14 @@
 # Changelog for setup-scripts
 
+## 0.0.7 (2022-03-07)
+
+* Rename Docker-CE install script.
+* Add Docker configure proxy script.
+* Add Docker configure registry-mirrors script.
+* Add Docker nvidia-container-runtime script.
+* Fixed misspellings.
+* Contributors: ZHWKnight.
+
 ## 0.0.6 (2022-01-13)
 
 * Add Microsoft Edge browser install script.
