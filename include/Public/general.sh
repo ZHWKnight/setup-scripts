@@ -13,11 +13,11 @@ set -o pipefail
 CPUCORES=$(cat /proc/cpuinfo | grep "processor" | wc -l)
 TEMPLET_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 SCRIPT_DIR=${TEMPLET_DIR%/*}
-USER_APP_DIR=${HOME}/App
-USER_ENV_DIR=${HOME}/Env
-USER_PKG_DIR=${HOME}/Downloads/Pkg
-USER_ROS1_WORKSPACE=${HOME}/Works/ros1_ws
-USER_ROS2_WORKSPACE=${HOME}/Works/ros2_ws
+USER_APP_DIR=${HOME}/Apps
+USER_ENV_DIR=${HOME}/Envs
+USER_PKG_DIR=${HOME}/Downloads/Pkgs
+USER_ROS1_WORKSPACE=${HOME}/Worksp/ros1_ws
+USER_ROS2_WORKSPACE=${HOME}/Worksp/ros2_ws
 
 UBUNTU_RELEASE=$(lsb_release -rs)
 LAST_TIPS=""
