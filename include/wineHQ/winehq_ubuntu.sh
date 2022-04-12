@@ -7,7 +7,10 @@
 sudo dpkg --add-architecture i386 
 sudo wget -qO- https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add -
 sudo apt-add-repository "deb https://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main"
-sudo cp ../../etc/apt/sources_lists/wineHQ_$(lsb_release -cs).list /etc/apt/sources.list.d/winehq.list
+# sudo tee /etc/apt/sources.list.d/winehq.list <<EOF >>/dev/null
+# deb https://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main
+# # deb-src https://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main
+# EOF
 wget -P /tmp https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/i386/libfaudio0_19.07-0~bionic_i386.deb
 wget -P /tmp https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/amd64/libfaudio0_19.07-0~bionic_amd64.deb
 sudo apt install -y /tmp/libfaudio0_19.07-0~bionic_i386.deb /tmp/libfaudio0_19.07-0~bionic_amd64.deb

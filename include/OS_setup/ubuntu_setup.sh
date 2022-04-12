@@ -6,7 +6,19 @@
 
 # Set apt source to aliyun
 sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
-sudo cp ../../etc/apt/sources_lists/$(lsb_release -is)_$(lsb_release -cs).list /etc/apt/sources.list
+sudo tee /etc/apt/sources.list <<EOF >>/dev/null
+deb https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs) main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs)-security main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs)-updates main restricted universe multiverse
+# deb https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs)-proposed main restricted universe multiverse
+# deb https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs)-backports main restricted universe multiverse
+
+# deb-src https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs) main restricted universe multiverse
+# deb-src https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs)-security main restricted universe multiverse
+# deb-src https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs)-updates main restricted universe multiverse
+# deb-src https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs)-proposed main restricted universe multiverse
+# deb-src https://mirrors.aliyun.com/ubuntu/ $(lsb_release -cs)-backports main restricted universe multiverse
+EOF
 
 sudo apt update
 
@@ -24,4 +36,4 @@ sudo apt install -y \
 # Set pip source to aliyun
 source ../python/pip_source_setup.sh
 
-mkdir ~/Workspaces
+mkdir ~/Worksp

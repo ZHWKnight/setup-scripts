@@ -4,50 +4,54 @@
 #
 # Github: https://github.com/zhwknight/setup-scripts
 
-# ROS 1.0 noetic or ROS 2.0 foxy
+## Reference website:
+# ROS (Robot Operating System) offical website
+# https://www.ros.org/
+# ROS Index
+# https://index.ros.org/
+# ROS Documentation
+# http://docs.ros.org/
+
 if [[ "$(lsb_release -rs)" == "18.04" ]]; then
   if [[ -d "/opt/ros/melodic" ]]; then
-    FOUND_ROS1=melodic
+    FOUND_ROS_LIST[${#FOUND_ROS_LIST[@]}]=melodic
   fi
   if [[ -d "/opt/ros/dashing" ]]; then
-    FOUND_ROS2=dashing
+    FOUND_ROS_LIST[${#FOUND_ROS_LIST[@]}]=dashing
   fi
 elif [[ "$(lsb_release -rs)" == "20.04" ]]; then
   if [[ -d "/opt/ros/noetic" ]]; then
-    FOUND_ROS1=noetic
+    FOUND_ROS_LIST[${#FOUND_ROS_LIST[@]}]=noetic
   fi
   if [[ -d "/opt/ros/foxy" ]]; then
-    FOUND_ROS2=foxy
+    FOUND_ROS_LIST[${#FOUND_ROS_LIST[@]}]=foxy
+  fi
+  if [[ -d "/opt/ros/galactic" ]]; then
+    FOUND_ROS_LIST[${#FOUND_ROS_LIST[@]}]=galactic
   fi
 fi
 
-if [[ ${FOUND_ROS1:+"true"} == "true" && ${FOUND_ROS2:+"true"} != "true" ]]; then
-  source /opt/ros/${FOUND_ROS1}/setup.bash
-  source ${HOME}/Works/ros1_ws/devel/setup.bash
-elif [[ ${FOUND_ROS1:+"true"} != "true" && ${FOUND_ROS2:+"true"} == "true" ]]; then
-  source /opt/ros/${FOUND_ROS2}/setup.bash
-  source ${HOME}/Works/ros2_ws/install/local_setup.bash
-elif [[ ${FOUND_ROS1:+"true"} == "true" && ${FOUND_ROS2:+"true"} == "true" ]]; then
-
-  if [[ $1 ]]; then
-    _ROS_VERSION=$1
-  else
-    read -p "ROS 1 ${FOUND_ROS1} or ROS 2 ${FOUND_ROS2}? ...[1/2]" _ROS_VERSION
-  fi
-  if [[ ${_ROS_VERSION} == "1" ]]; then
-    echo "Select ROS1 ${FOUND_ROS1}"
-    source /opt/ros/${FOUND_ROS1}/setup.bash
-    source ${HOME}/Works/ros1_ws/devel/setup.bash
-  elif [[ ${_ROS_VERSION} == "2" ]]; then
-    echo "Select ROS2 ${FOUND_ROS2}"
-    source /opt/ros/${FOUND_ROS2}/setup.bash
-    source ${HOME}/Works/ros2_ws/install/local_setup.bash
-  else
-    echo "Wrong input."
-    exit 1
-  fi
+if [[ $1 ]]; then
+  _ros_version=$1
 else
-  echo "No ROS be found"
+  echo "Found ROS version:"
+  i=0
+  for x in ${FOUND_ROS_LIST[@]}; do
+    let i++
+    # let i+=1
+    # i=$((i+1))
+    echo -e "$i,\t$x"
+  done
+  read -p "Which ROS version do you want? ... " _ros_version
+fi
+if [ ${_ros_version} -gt 0 ] && [ ${_ros_version} -le ${#FOUND_ROS_LIST[@]} ]; then
+  echo "Select ROS ${FOUND_ROS_LIST[$((_ros_version - 1))]}"
+  . /opt/ros/${FOUND_ROS_LIST[$((_ros_version - 1))]}/setup.bash
+  alias ros1_local_ws=". ${HOME}/Worksp/ros1_ws/devel/local_setup.bash"
+  alias ros2_local_ws=". ${HOME}/Worksp/ros2_ws/install/local_setup.bash"
+else
+  echo "Wrong input."
+  exit 1
 fi
 
 #source /home/ros/RobTool/ROS1/Wiki/devel/setup.bash

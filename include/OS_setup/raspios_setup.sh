@@ -20,4 +20,4 @@ sudo apt install -y \
   curl \
   ;
 
-mkdir ~/Workspaces
+mkdir ~/Worksp

@@ -1,5 +1,13 @@
 # Changelog for setup-scripts
 
+## 0.0.8 (2022-04-12)
+
+* Remove all apt repository list file.
+* Rename Worksp, Apps, Envs and Pkgs path.
+* Add conda configure script.
+* Rewrite ros install scripts.
+* Contributors: ZHWKnight.
+
 ## 0.0.7 (2022-03-07)
 
 * Rename Docker-CE install script.
