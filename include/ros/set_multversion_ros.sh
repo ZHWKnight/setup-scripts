@@ -23,6 +23,9 @@ echo_colored "Do you want deploy multversion ROS?\n是否部署多版本 ROS?" -
 read -p "[Y/n]" _INPUT
 case ${_INPUT} in
 [yY][eE][sS] | [yY])
+  sudo apt install -y \
+    ros-${SH_ROS_DISTRO}-ros1-bridge \
+    ;
   mkdir ${HOME}/.ros >/dev/null 2>&1
   cp ros_selection.sh ${HOME}/.ros/ros_selection.sh
   sed -ir ${HOME}/.bashrc \

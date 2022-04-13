@@ -1,11 +1,16 @@
 # Changelog for setup-scripts
 
+## 0.0.9 (2022-04-12)
+
+* Fix ROS install scripts bug.
+* Contributors: ZHWKnight.
+
 ## 0.0.8 (2022-04-12)
 
 * Remove all apt repository list file.
 * Rename Worksp, Apps, Envs and Pkgs path.
 * Add conda configure script.
-* Rewrite ros install scripts.
+* Rewrite ROS install scripts.
 * Contributors: ZHWKnight.
 
 ## 0.0.7 (2022-03-07)
@@ -42,7 +47,7 @@
 
 ## 0.0.3 (2021-03-30)
 
-* Update ros scripts.
+* Update ROS scripts.
 * Contributors: ZHWKnight.
 
 ## 0.0.3 (2021-02-26)
@@ -52,7 +57,7 @@
 
 ## 0.0.2 (2021-02-25)
 
-* Rewrite ros scripts.
+* Rewrite ROS scripts.
 * Contributors: ZHWKnight.
 
 ## 0.0.1 (2021-02-23)

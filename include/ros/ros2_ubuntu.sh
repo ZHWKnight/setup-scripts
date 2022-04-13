@@ -50,7 +50,6 @@ echo
 
 sudo apt install -y \
   ros-${SH_ROS_DISTRO}-desktop \
-  ros-${SH_ROS_DISTRO}-ros1-bridge \
   python3-colcon-common-extensions \
   python3-argcomplete \
   python3-vcstool \
