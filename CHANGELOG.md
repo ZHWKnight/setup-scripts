@@ -1,5 +1,11 @@
 # Changelog for setup-scripts
 
+## 0.0.11 (2022-04-14)
+
+* Fix the problem that ROS script cannot source envrionment.
+* Fix conda script bug.
+* Contributors: ZHWKnight.
+
 ## 0.0.10 (2022-04-14)
 
 * Add Docker nvidia-container-toolkit script.

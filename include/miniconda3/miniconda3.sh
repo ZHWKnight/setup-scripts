@@ -5,13 +5,14 @@
 # Github: https://github.com/zhwknight/setup-scripts
 
 # eval "$(/home/zhw/Envs/miniconda3/bin/conda shell.YOUR_SHELL_NAME hook)"
-conda_init="alias conda-init=\". ${HOME}/Envs/miniconda3/bin/activate\""
+conda_init_cmd=". ${HOME}/Envs/miniconda3/bin/activate"
+conda_init_alias="alias conda-init=\"${conda_init_cmd}\""
 if grep -Fxq "$conda_init" ~/.bashrc; then
     :
 else
     echo "$conda_init" >>~/.bashrc
 fi
-eval $conda_init
+eval $conda_init_cmd
 
 conda config --set show_channel_urls yes
 

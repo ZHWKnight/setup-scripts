@@ -47,8 +47,8 @@ fi
 if [ ${_ros_version} -gt 0 ] && [ ${_ros_version} -le ${#FOUND_ROS_LIST[@]} ]; then
   echo "Select ROS ${FOUND_ROS_LIST[$((_ros_version - 1))]}"
   . /opt/ros/${FOUND_ROS_LIST[$((_ros_version - 1))]}/setup.bash
-  alias ros1_local_ws=". ${HOME}/Worksp/ros1_ws/devel/local_setup.bash"
-  alias ros2_local_ws=". ${HOME}/Worksp/ros2_ws/install/local_setup.bash"
+  alias ros1_local_ws=". ${HOME}/Worksp/ros1_ws/devel/setup.bash"
+  alias ros2_local_ws=". ${HOME}/Worksp/ros2_ws/install/setup.bash"
 else
   echo "Wrong input."
   exit 1
