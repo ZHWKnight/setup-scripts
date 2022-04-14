@@ -15,9 +15,11 @@ cur_dir=$(cd -P "$(dirname "$0")" && pwd -P)
 # ROS Documentation
 # http://docs.ros.org/
 
-# Setup environment variables
-echo
-echo_colored "Setup environment variables\n设置环境变量" -FC blue
+if [[ "${UBUNTU_RELEASE}" == "18.04" ]]; then
+  SH_ROS_DISTRO="dashing"
+elif [[ "${UBUNTU_RELEASE}" == "20.04" ]]; then
+  SH_ROS_DISTRO="galactic"
+fi
 
 echo_colored "Do you want deploy multversion ROS?\n是否部署多版本 ROS?" -FC yellow
 read -p "[Y/n]" _INPUT
