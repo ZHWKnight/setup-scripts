@@ -1,5 +1,11 @@
 # Changelog for setup-scripts
 
+## 0.0.10 (2022-04-14)
+
+* Add Docker nvidia-container-toolkit script.
+* Remove Docker nvidia-container-runtime script.
+* Contributors: ZHWKnight.
+
 ## 0.0.9 (2022-04-12)
 
 * Fix ROS install scripts bug.
