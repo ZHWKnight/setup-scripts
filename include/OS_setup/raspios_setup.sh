@@ -4,11 +4,11 @@
 #
 # Github: https://github.com/zhwknight/setup-scripts
 
-# Set apt source to aliyun
+# Set apt source to TUNA
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
 sudo cp /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak
-sudo sed -i -e 's`http://raspbian.raspberrypi.org/raspbian/`https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/`' /etc/apt/sources.list
-sudo sed -i -e 's`http://archive.raspberrypi.org/debian/`https://mirrors.tuna.tsinghua.edu.cn/raspberrypi/`' /etc/apt/sources.list.d/raspi.list
+sudo sed -i -e 's`http://raspbian.raspberrypi.org/raspbian/`http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/`' /etc/apt/sources.list
+sudo sed -i -e 's`http://archive.raspberrypi.org/debian/`http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/`' /etc/apt/sources.list.d/raspi.list
 
 sudo apt update
 

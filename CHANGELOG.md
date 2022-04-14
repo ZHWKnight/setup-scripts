@@ -1,5 +1,10 @@
 # Changelog for setup-scripts
 
+## 0.0.12 (2022-04-15)
+
+* Change all source from Aliyun to TUNA.
+* Contributors: ZHWKnight.
+
 ## 0.0.11 (2022-04-14)
 
 * Fix the problem that ROS script cannot source envrionment.

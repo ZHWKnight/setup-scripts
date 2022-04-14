@@ -4,12 +4,12 @@
 #
 # Github: https://github.com/zhwknight/setup-scripts
 
-# Set pip source to aliyun
+# Set pip source to TUNA
 mkdir ~/.pip
 tee ~/.pip/pip.conf <<EOF >>/dev/null
 [global]
-index-url = https://mirrors.aliyun.com/pypi/simple/
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 [install]
-trusted-host = mirrors.aliyun.com
+trusted-host = https://pypi.tuna.tsinghua.edu.cn/simple
 EOF
 sudo cp -r ~/.pip /root/
