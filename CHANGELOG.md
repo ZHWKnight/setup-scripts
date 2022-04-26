@@ -1,5 +1,13 @@
 # Changelog for setup-scripts
 
+## 0.0.14 (2022-04-27)
+
+* Add ZeroTier install script and ZeroTier join network script.
+* Update WineHQ install script.
+* Update MiniConda confirugre script.
+* Other small code style changes.
+* Contributors: ZHWKnight.
+
 ## 0.0.13 (2022-04-15)
 
 * Fix ROS set_multversion_ros script bug.

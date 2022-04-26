@@ -33,7 +33,7 @@ fi
 echo
 echo_colored "Setup sources and keys\n设定源和密钥" -FC blue
 echo
-sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 &&
+sudo apt-key adv --keyserver "hkp://keyserver.ubuntu.com:80" --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 &&
   sudo sh -c '. /etc/lsb-release && echo "deb https://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ `lsb_release -cs` main" > /etc/apt/sources.list.d/ros-latest.list'
 if (($?)); then
   echo_colored "Error occurred, try again\n发生错误，请重试" -FC red

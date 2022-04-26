@@ -7,10 +7,10 @@
 # eval "$(/home/zhw/Envs/miniconda3/bin/conda shell.YOUR_SHELL_NAME hook)"
 conda_init_cmd=". ${HOME}/Envs/miniconda3/bin/activate"
 conda_init_alias="alias conda-init=\"${conda_init_cmd}\""
-if grep -Fxq "$conda_init" ~/.bashrc; then
+if grep -Fxq "$conda_init_alias" ~/.bashrc; then
     :
 else
-    echo "$conda_init" >>~/.bashrc
+    echo "$conda_init_alias" >>~/.bashrc
 fi
 eval $conda_init_cmd
 
