@@ -29,10 +29,13 @@ wget -P ~/.cache/wine https://dl.winehq.org/wine/wine-mono/7.0.0/wine-mono-7.0.0
 
 git clone https://gitee.com/ZHWKnight/gitstore_wine_winetricks.git
 # tar -czvf - wine winetricks |split -b 95m - wine_winetricks.tar.gz
+mkdir -p ~/.cache >/dev/null 2>&1
 cat gitstore_wine_winetricks/wine_winetricks.tar.gza* | tar -xzvC ~/.cache
+
 
 git clone https://gitee.com/ZHWKnight/gitstore_wine_windows_fonts.git
 # tar -czvf - Fonts |split -b 95m - wine_windows_fonts.tar.gz
+mkdir -p ~/.wine/drive_c/windows >/dev/null 2>&1
 cat gitstore_wine_windows_fonts/wine_windows_fonts.tar.gza* | tar -xzvC ~/.wine/drive_c/windows
 
 popd

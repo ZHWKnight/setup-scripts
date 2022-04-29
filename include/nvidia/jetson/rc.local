@@ -1,0 +1,4 @@
+#!/bin/sh
+sh /root/enable_CAN.sh &
+jetson_clocks
+exit 0

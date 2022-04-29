@@ -1,5 +1,14 @@
 # Changelog for setup-scripts
 
+## 0.0.15 (2022-04-29)
+
+* Add Syncthing install script.
+* Add gcc and g++ compiler install script
+* Add CAN confirugre script for Nvidia Jetson.
+* Update MiniConda confirugre script.
+* Rename a lot of path.
+* Contributors: ZHWKnight.
+
 ## 0.0.14 (2022-04-27)
 
 * Add ZeroTier install script and ZeroTier join network script.
