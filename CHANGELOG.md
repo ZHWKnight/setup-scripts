@@ -1,5 +1,10 @@
 # Changelog for setup-scripts
 
+## 0.0.16 (2022-05-09)
+
+* Update Zerotier confirugre script.
+* Contributors: ZHWKnight.
+
 ## 0.0.15 (2022-04-29)
 
 * Add Syncthing install script.

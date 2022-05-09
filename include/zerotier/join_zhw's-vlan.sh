@@ -7,4 +7,4 @@
 sudo zerotier-cli join abfd31bd47528abd
 sudo zerotier-cli listnetworks
 sudo zerotier-cli orbit e683db72d1 e683db72d1
-sudo zerotier-cli peers
+sudo zerotier-cli listpeers
