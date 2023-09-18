@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script will install "docker".
+# This script will install "docker" at Ubuntu OS.
 #
 # Github: https://github.com/zhwknight/setup-scripts
 
@@ -40,4 +40,6 @@ sudo apt install -y \
   ;
 
 # Adding your user to the "docker" group
+sudo groupadd docker
 sudo usermod -aG docker $USER
+newgrp docker
