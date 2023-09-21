@@ -1,5 +1,15 @@
 # Changelog for setup-scripts
 
+## 0.0.18 (2023-09-21)
+
+- Modify Docker Compose configure script:
+  - acme.sh
+  - nginx
+- Add Docker Compose configure script:
+  - ms365_e5_renewx
+
+- Contributors: ZHWKnight.
+
 ## 0.0.17 (2023-09-19)
 
 - Remove Docker-CE Centos install script.

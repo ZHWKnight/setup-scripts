@@ -1,32 +1,39 @@
 #!/bin/bash
 
 SRVS_PATH=$HOME/Srvs
-cd $SRVS_PATH
+mkdir ${SRVS_PATH}
+cd ${SRVS_PATH}
 
 SRV_NAME=acme.sh
-mkdir $SRV_NAME
+mkdir ${SRV_NAME}
 
-mkdir -p $SRV_NAME/acme.sh
+mkdir -p ${SRV_NAME}/acme.sh
 
-tee $SRV_NAME/compose.yaml <<EOF >>/dev/null
+tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
 version: '3'
 services:
-  acme.sh:
+  ${SRV_NAME}:
     image: neilpang/acme.sh:latest
     command: daemon
-    container_name: acme.sh
+    container_name: ${SRV_NAME}
     environment:
       - TZ=Asia/Shanghai
     network_mode: "host"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - $SRVS_PATH/$SRV_NAME/acme.sh/:/acme.sh/
+      - ${SRVS_PATH}/${SRV_NAME}/acme.sh/:/acme.sh/
     restart: always
 EOF
 
-sed -i "$ a  \  - $SRV_NAME/compose.yaml" compose.yaml
+srv_include="  - ${SRV_NAME}/compose.yaml"
+if grep -Fxq "$srv_include" compose.yaml; then
+    echo "compose.yaml already includes ${SRV_NAME}/compose.yaml"
+    :
+else
+    sed -i "/^include/a\\$srv_include"  compose.yaml
+fi
 
-docker compose up -d $SRV_NAME
+docker compose up -d ${SRV_NAME}
 
 echo -e "Do you want to deploy certification now?\n你想现在部署证书么？"
 read -p "[Y/n]: " _INPUT
