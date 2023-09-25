@@ -21,7 +21,7 @@ services:
     network_mode: "host"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ${SRVS_PATH}/${SRV_NAME}/acme.sh/:/acme.sh/
+      - ./acme.sh/:/acme.sh/
     restart: always
 EOF
 

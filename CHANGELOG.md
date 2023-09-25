@@ -1,5 +1,17 @@
 # Changelog for setup-scripts
 
+## 0.0.19 (2023-09-25)
+- Add Docker-CE install script:
+  - debain
+- Modify Docker Compose configure script:
+  - acme.sh
+  - nginx
+  - ms365_e5_renewx
+- Add Docker Compose configure script:
+  - zerotier-planet
+
+- Contributors: ZHWKnight.
+
 ## 0.0.18 (2023-09-21)
 
 - Modify Docker Compose configure script:

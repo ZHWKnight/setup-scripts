@@ -30,9 +30,9 @@ services:
     environment:
       - TZ=Asia/Shanghai
     volumes:
-      - ${SRVS_PATH}/${SRV_NAME}/renewx/Deploy/:/renewx/Deploy/
-      - ${SRVS_PATH}/${SRV_NAME}/renewx/appdata/:/renewx/appdata/
-      - ${SRVS_PATH}/${SRV_NAME}/renewx/wwwroot/:/renewx/wwwroot
+      - ./renewx/Deploy/:/renewx/Deploy/
+      - ./renewx/appdata/:/renewx/appdata/
+      - ./renewx/wwwroot/:/renewx/wwwroot
     ports:
       - 1066:1066
     restart: always
