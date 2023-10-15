@@ -1,24 +1,42 @@
 # Changelog for setup-scripts
 
-## 0.0.19 (2023-09-25)
-- Add Docker-CE install script:
-  - debain
-- Modify Docker Compose configure script:
-  - acme.sh
-  - nginx
-  - ms365_e5_renewx
+## 0.0.20 (2023-10-15)
+
+- Add RDP(MSTSS) Server enable script.
 - Add Docker Compose configure script:
-  - zerotier-planet
+  - alist.sh
+  - clash.sh
+  - mariadb.sh
+  - vaultwarden.sh
+  - netmaker.sh (not test)
+- Modify Docker Compose configure script:
+  - acme.sh.sh
+  - ms365_e5_renewx.sh
+  - nginx.sh
+  - zerotier-planet.sh
+
+- Contributors: ZHWKnight.
+
+## 0.0.19 (2023-09-25)
+
+- Add Docker-CE install script:
+  - debain.sh
+- Modify Docker Compose configure script:
+  - acme.sh.sh
+  - nginx.sh
+  - ms365_e5_renewx.sh
+- Add Docker Compose configure script:
+  - zerotier-planet.sh
 
 - Contributors: ZHWKnight.
 
 ## 0.0.18 (2023-09-21)
 
 - Modify Docker Compose configure script:
-  - acme.sh
-  - nginx
+  - acme.sh.sh
+  - nginx.sh
 - Add Docker Compose configure script:
-  - ms365_e5_renewx
+  - ms365_e5_renewx.sh
 
 - Contributors: ZHWKnight.
 
@@ -29,8 +47,8 @@
   - Ubuntu
   - Rocky Linux
 - Add Docker Compose configure script:
-  - acme.sh
-  - nginx
+  - acme.sh.sh
+  - nginx.sh
 
 - Contributors: ZHWKnight.
 

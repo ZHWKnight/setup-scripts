@@ -4,35 +4,31 @@ SRVS_PATH=$HOME/Srvs
 mkdir ${SRVS_PATH}
 cd ${SRVS_PATH}
 
-SRV_NAME=ms365_e5_renewx
+SRV_NAME=mariadb
 mkdir ${SRV_NAME}
+
+read -p "Please input database root password: " _PASSWORD
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
 version: '3'
 services:
-    ms365_e5_renewx:
-        image: gladtbam/ms365_e5_renewx:latest
-        container_name: ms365_e5_renewx
+    mariadb:
+        image: mariadb:latest
+        container_name: mariadb
         environment:
             - TZ=Asia/Shanghai
-        volumes:
-            - ms365_e5_renewx_config:/renewx/Deploy/
-            - ms365_e5_renewx_data:/renewx/appdata/
+            - MYSQL_ROOT_PASSWORD=${_PASSWORD}
         ports:
-            - 1066:1066
+            - 3306:3306
+        volumes:
+            - mariadb_config:/etc/mysql/
+            - mariadb_data:/var/lib/mysql/
         restart: always
 volumes:
-    ms365_e5_renewx_config:
-    ms365_e5_renewx_data:
+    mariadb_config:
+    mariadb_data:
 
 EOF
-
-if [ ! -f "${SRVS_PATH}/compose.yaml" ]; then
-    tee ${SRVS_PATH}/compose.yaml <<EOF >>/dev/null
-version: '3'
-include:
-EOF
-fi
 
 srv_include="    - ${SRV_NAME}/compose.yaml"
 if grep -Fxq "$srv_include" compose.yaml; then

@@ -4,31 +4,28 @@ SRVS_PATH=${HOME}/Srvs
 mkdir ${SRVS_PATH}
 cd ${SRVS_PATH}
 
-SRV_NAME=nginx
+SRV_NAME=alist
 mkdir ${SRV_NAME}
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
 version: '3'
 services:
-    nginx:
-        image: nginx:latest
-        container_name: nginx
+    alist:
+        # image: 'xhofe/alist:latest'
+        image: 'xhofe/alist-aria2:latest'
+        container_name: alist
         environment:
             - TZ=Asia/Shanghai
+            - PUID=1000
+            - PGID=1000
+            - UMASK=022
         ports:
-            - 80:80
-            - 443:443
+            - 5244:5244
         volumes:
-            - nginx_share:/usr/share/nginx/
-            - nginx_config:/etc/nginx/
+            - alist_data:/opt/alist/data
         restart: always
-        labels:
-            - "sh.acme.autoload.domain=zhw.link"
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
 volumes:
-    nginx_share:
-    nginx_config:
+    alist_data:
 
 EOF
 
@@ -37,7 +34,7 @@ if grep -Fxq "$srv_include" compose.yaml; then
     echo "compose.yaml already includes ${SRV_NAME}/compose.yaml"
     :
 else
-    sed -i "/^include/a\\$srv_include"  compose.yaml
+    sed -i "/^include/a\\$srv_include" compose.yaml
 fi
 
 docker compose up -d ${SRV_NAME}
