@@ -1,5 +1,13 @@
 # Changelog for setup-scripts
 
+## 0.0.20 (2023-11-04)
+
+- Modify Docker Compose configure script:
+  - clash.sh
+  - vaultwarden.sh
+
+- Contributors: ZHWKnight.
+
 ## 0.0.20 (2023-10-15)
 
 - Add RDP(MSTSS) Server enable script.

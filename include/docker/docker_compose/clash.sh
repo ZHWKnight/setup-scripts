@@ -26,6 +26,7 @@ services:
         ports:
             - 7890:7890
             - 7891:7891
+            - 57890:57890
             - 9090:9090 # external controller (Restful API)
         # TUN
         # cap_add:

@@ -9,6 +9,9 @@ mkdir ${SRV_NAME}
 
 read -p "Please input database user vaultwarden's password: " _DB_PASSWORD
 read -p "Please input vaultwarden's admin token: " _ADMIN_TOKEN
+echo "You can Request Hosting Installation ID and Key at https://bitwarden.com/host/"
+read -p "Please input bitwarden hosting installation ID: " _HOSTING_ID
+read -p "Please input bitwarden hosting installation Key: " _HOSTING_KEY
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
 version: '3'
@@ -24,6 +27,9 @@ services:
             - LOG_LEVEL=warn
             - EXTENDED_LOGGING=true
             - RUST_BACKTRACE=1
+            - PUSH_ENABLED=true
+            - PUSH_INSTALLATION_ID=${_HOSTING_ID}
+            - PUSH_INSTALLATION_KEY=${_HOSTING_KEY}
         ports:
             - 8080:80
         volumes:
