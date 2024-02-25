@@ -1,5 +1,17 @@
 # Changelog for setup-scripts
 
+## 0.0.21 (2024-02-26)
+
+- Add Termux configure script:
+  - termux_setup.sh
+  - termux_pulseaudio.sh
+  - termux_x11.sh
+  - termux_virglrenderer.sh
+  - termux_proot_desktop.sh
+  - termux_native_desktop.sh (not complete)
+
+- Contributors: ZHWKnight.
+
 ## 0.0.20 (2023-11-04)
 
 - Modify Docker Compose configure script:
