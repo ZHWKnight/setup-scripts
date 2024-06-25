@@ -1,5 +1,24 @@
 # Changelog for setup-scripts
 
+## 0.0.22 (2024-06-25)
+
+- Update zerotier install script.
+- Remove docker registry-mirrors configure script.
+- Update docker daemon proxy configure script.
+- Update docker install script.
+- Update docker compose.sh, remove version check in these scripts:
+  - acme.sh.sh
+  - alist.sh
+  - clash.sh
+  - nginx.sh
+  - mariadb.sh
+  - ms365_e5_renewx.sh
+  - nginx.sh
+  - vaultwarden.sh
+  - zerotier-planet.sh
+
+- Contributors: ZHWKnight.
+
 ## 0.0.21 (2024-02-26)
 
 - Add Termux configure script:

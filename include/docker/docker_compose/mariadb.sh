@@ -10,7 +10,6 @@ mkdir ${SRV_NAME}
 read -p "Please input database root password: " _PASSWORD
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
-version: '3'
 services:
     mariadb:
         image: mariadb:latest

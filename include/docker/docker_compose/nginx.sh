@@ -8,7 +8,6 @@ SRV_NAME=nginx
 mkdir ${SRV_NAME}
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
-version: '3'
 services:
     nginx:
         image: nginx:latest

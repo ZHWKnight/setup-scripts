@@ -10,7 +10,6 @@ mkdir ${SRV_NAME}
 docker image load < zerotier-planet.tar.gz
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
-version: '3'
 services:
     zerotier-planet:
         image: zerotier-planet:zt-1.10.6

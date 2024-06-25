@@ -8,7 +8,6 @@ SRV_NAME=alist
 mkdir ${SRV_NAME}
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
-version: '3'
 services:
     alist:
         # image: 'xhofe/alist:latest'

@@ -15,7 +15,6 @@ git clone https://github.com/Dreamacro/clash-dashboard.git
 cd ..
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
-version: '3'
 services:
     clash:
         # image: dreamacro/clash-premium

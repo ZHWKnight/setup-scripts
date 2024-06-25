@@ -8,7 +8,6 @@ SRV_NAME=acme.sh
 mkdir ${SRV_NAME}
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
-version: '3'
 services:
     acme.sh:
         image: neilpang/acme.sh:latest

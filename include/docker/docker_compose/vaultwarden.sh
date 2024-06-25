@@ -14,7 +14,6 @@ read -p "Please input bitwarden hosting installation ID: " _HOSTING_ID
 read -p "Please input bitwarden hosting installation Key: " _HOSTING_KEY
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
-version: '3'
 services:
     vaultwarden:
         image: vaultwarden/server:latest

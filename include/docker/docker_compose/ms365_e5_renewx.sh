@@ -8,7 +8,6 @@ SRV_NAME=ms365_e5_renewx
 mkdir ${SRV_NAME}
 
 tee ${SRV_NAME}/compose.yaml <<EOF >>/dev/null
-version: '3'
 services:
     ms365_e5_renewx:
         image: gladtbam/ms365_e5_renewx:latest
