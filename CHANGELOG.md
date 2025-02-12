@@ -1,5 +1,14 @@
 # Changelog for setup-scripts
 
+## 0.0.0 (2025-02-13)
+
+- Update these scripts:
+  - docker-ce_debain.sh
+  - docker-ce_ubuntu.sh
+- reset the version number to 0.0.0
+
+- Contributors: ZHWKnight.
+
 ## 0.0.22 (2024-06-25)
 
 - Update zerotier install script.
